@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+
+    var userName = Context.Session.GetString("currentUser");
+
+}
+
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Super Market</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                @if (userName != null)
+                {
+                    <a class="nav-link">Hoşgeldin, @userName<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-action="GetCart" asp-controller="Cart"><span class="sr-only">Sepete Git</span></a>
+                }
+
+            </li>
+        </ul>
+        <ul class="navbar-nav ">
+            <li class="nav-item">
+                @if (userName != null)
+                {
+                    <a class="nav-link" asp-action="Logout" asp-controller="Auth">
+                        Log Out
+                    </a>
+                }
+
+            </li>
+
+
+        </ul>
+    </div>
+</nav>

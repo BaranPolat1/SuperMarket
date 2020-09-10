@@ -1,0 +1,126 @@
+﻿@model SuperMarket.Associate.VM.OrderCartItemVM
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+<div class="row mb-2">
+    @foreach (var item in Model.CartItems)
+    {
+
+        <div class="col-md-4 cardItems">
+            <div class="alert-danger">@ViewBag.Siparis</div>
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">@item.Product.Name</h3>
+                    @if (item.Product.Description != null)
+                    {
+                        if (item.Product.Description.Length > 20)
+                        {
+                            <p class="card-text mb-auto">@item.Product.Description.Substring(50)...</p>
+                        }
+                        else
+                        {
+                            <p class="card-text mb-auto">@item.Product.Description</p>
+                        }
+                    }
+
+                </div>
+                <div class="col-auto d-none d-lg-block">
+
+                    <img src="https://reimg-teknosa-cloud-prod.mncdn.com/mnresize/300/300/productimage/125077287/125077287_0_MC/8820538146866_1571310130510.jpg" style="width:250px; height:250px;"><br />
+
+                    <span>Toplam Aded:</span><b>@item.Quantity</b><br />
+                    <span>Toplam Fiyat:</span><b>@item.TotalAmount</b><br />
+                </div>
+
+            </div>
+
+        </div>
+
+
+    }
+</div>
+
+<span>TOPLAM TUTAR:<b> @TempData["totalAmount"] TL</b></span>
+<br />
+<br />
+
+<div class="col-md-6">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="control-label">Lütfen Ödeme Tipini Seçiniz</label>
+            <select asp-for="Order.PaymentType" id="Payment" class="form-control">
+                <option value="Select" id="select" selected>--Select--</option>
+                <option value="Kart">Kredi Kartı</option>
+                <option value="Nakit">Nakit</option>
+            </select>
+        </div>
+        <div style="display:none" id="cartNo">
+            <label>Kart Numarasını giriniz:</label>  <input id="creditCart" class="form-control" type="text" />
+        </div><br />
+        <div class="form-group">
+            <input type="submit" id="siparis" value="Sipariş ver" disabled class="btn btn-primary" />
+        </div>
+        <input type="hidden" asp-for="Order.TotalAmount" value="@TempData["totalAmount"]" />
+    </form>
+</div>
+
+
+@section Scripts{
+
+
+
+    <script type="text/javascript">
+        $("#Payment").change(function () {
+            var type = $(this).val();
+            if (type == "Kart") {
+                $("#cartNo").show();
+            }
+            else {
+                $("#cartNo").hide();
+            }
+            if (type=="Select") {
+                $("#siparis").prop('disabled', true);
+                return;
+            }
+            $("#select").hide();
+            $("#siparis").prop('disabled', false);
+            
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).on('click', '#siparis', function (e) {
+            var type = $("#Payment").val();
+            var kart = $("#creditCart").val()
+            if (type == "Kart" && $.trim(kart) == "") {
+                alert("Lütfen kart numarasını giriniz");
+                e.preventDefault();
+                return;
+            }
+            if (type == "Select") {
+                alert("Lütfen ödeme yöntemini seçiniz");
+                e.preventDefault();
+                return;
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var type = $("#Payment").val();
+            if (type != "Select") {
+                $("#siparis").prop('disabled', false);
+            }
+        });
+    </script>
+
+
+
+}
+
+
+

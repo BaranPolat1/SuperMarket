@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200902172044_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200902172044_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200902172246_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200902172246_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200902172648_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200902172648_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200902195313_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200902195313_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200902205548_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200902205548_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200903193829_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200903193829_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200903222832_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200903222832_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200906193520_InitailCreate.cs" />
+    <Compile Remove="Migrations\20200906193520_InitailCreate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SuperMarket.Map\SuperMarket.Map.csproj" />
+  </ItemGroup>
+
+</Project>

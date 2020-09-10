@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SuperMarket.Associate.DTO.ProductDTO>
+@using Microsoft.AspNetCore.Http
+
+@{
+    string userName = Context.Session.GetString("currentUser");
+
+}
+<div class="row mb-2">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 baran">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">@item.Name</h3>
+
+                    @if (item.Description != null)
+                    {
+                        if (item.Description.Length > 50)
+                        {
+                            <p class="card-text mb-auto">@item.Description.Substring(50)...</p>
+                        }
+                        else
+                        {
+                            <p class="card-text mb-auto">@item.Description</p>
+                        }
+                    }
+                </div>
+                <div class="col-auto d-none d-lg-block">
+
+                    <img src="https://reimg-teknosa-cloud-prod.mncdn.com/mnresize/300/300/productimage/125077287/125077287_0_MC/8820538146866_1571310130510.jpg" style="width:250px; height:250px;"><br />
+
+                    <span>Fiyat:</span><b class="price">@item.Price</b><br />
+                    <span>Stok:</span><b class="stock">@item.Stock</b><br />
+
+                    @if (userName != null)
+                    {
+                        <input type="button" class="btn btn-warning AddCard" value="Sepete Ekle" data-id="@item.Id" data-price="@item.Price" />
+                        <input type="button" class="btn-sm btn-danger Delete" value="Sil" data-id="@item.Id" />
+                        <a href="/Product/Edit/@item.Id">
+                            <input type="button" class="btn-sm btn-info" value="Edit" />
+                        </a>
+                    }
+                    <a href="/Product/Detail/@item.Id">
+                        <input type="button" class="btn-sm btn-primary" value="Details" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

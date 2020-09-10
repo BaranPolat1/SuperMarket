@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SuperMarket.Core\SuperMarket.Core.csproj" />
+    <ProjectReference Include="..\SuperMarket.Entity\SuperMarket.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

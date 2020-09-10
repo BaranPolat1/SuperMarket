@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SuperMarket.Associate.DTO.OrderDTO>
+
+@{
+    ViewData["Title"] = "GetOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Orders</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Total Amount
+            </th>
+            <th>
+                Payment Type
+            </th>
+            <th>
+                Order Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="toggle" data-id="@item.Id">
+                <td>
+                    <a class="dropdown-toggle">
+
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    <a href="#" class="btn btn-info">Details</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<div class="orderDetails">
+
+
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.toggle', function () {
+                var orderId = $(this).attr("data-id");
+                var list = "";
+                $.ajax({
+                    url: '/Order/GetOrder',
+                    data: { "orderId": orderId },
+                    type: 'POST',
+                    success: function (result) {
+                        $.each(result.orderDetails, function (key, value) {
+                            list += "<b>" + "Ürün Adı:" + " " + value.product.name + " " + " ," + " " + "Ürün Miktarı:" + " " + value.quantity + " " + ", " + " " + "Toplam Fiyat:" + " " + value.unitPrice + "</b>" + "<br/>";
+                        });
+                        $(".orderDetails").html(list);
+
+                        $(".orderDetails").toggle().slideToggle();
+                                                },
+                    error: function (result) {
+
+
+                    }
+
+
+
+                });
+
+            });
+        });
+    </script>
+
+
+}

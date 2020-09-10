@@ -1,0 +1,63 @@
+﻿@model SuperMarket.Associate.VM.ProductCategoryVM
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add</h1>
+<hr />
+<div class="row ml-3">
+    <div class="col-md-6">
+        <div class="alert">@ViewBag.Success</div>
+        <form asp-action="Add" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control col-sm-6" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <input asp-for="Product.Description" class="form-control col-sm-6" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control col-sm-6" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Stock" class="control-label "></label>
+                <input asp-for="Product.Stock" class="form-control col-sm-6" />
+                <span asp-validation-for="Product.Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ImageUpload" class="control-label"></label>
+                <input asp-for="Product.ImageUpload" class="form-control col-sm-6" />
+                <span asp-validation-for="Product.ImageUpload" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Lütfen kategori seçiniz</label>
+                <div class="col-sm-6">
+                    <select asp-for="Product.CategoryId" class="form-control">
+                        @foreach (var item in Model.Categories)
+                        {
+                            <option value="@item.Id">
+                                @item.Name
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add Product" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
