@@ -1,0 +1,1 @@
+E-Ticaret site yapısı baz alınarak Code First yaklaşımı ile DataBase oluşturulmuştur. Sipariş işlemlerinde Unit of Work patterninden yararlanılmıştır. Dependency Injection IoC Conatiner (AutoFac) ile gerçekleştirilmiştir. Bazı ekleme,listeleme işlemleri MSSQL Serverdan yapılmıştır. Birçok işlem JavaScript ile gerçekleştirilmektedir.
